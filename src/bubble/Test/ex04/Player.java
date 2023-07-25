@@ -22,6 +22,38 @@ public class Player extends JLabel implements Moveable{
 		initSetting();
 	}
 	
+	public boolean isLeft() {
+		return left;
+	}
+
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
+
+	public boolean isRight() {
+		return right;
+	}
+
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+
+	public boolean isUp() {
+		return up;
+	}
+
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+
+	public boolean isDown() {
+		return down;
+	}
+
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+
 	private void initObject() {
 		playerR = new ImageIcon("image/playerR.png");
 		playerL = new ImageIcon("image/playerL.png");
@@ -43,23 +75,45 @@ public class Player extends JLabel implements Moveable{
 	//이벤트핸들러
 	@Override
 	public void left() {
-		x = x - 10;
-		setLocation(x,y);
-		setIcon(playerL);
+		left =true;
+		new Thread(()-> {
+			while(left) {
+				x = x - 10;
+				setLocation(x,y);
+				setIcon(playerL);
+				try {
+					//0.01초
+					Thread.sleep(10);
+				}catch(InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 
 	@Override
 	public void right() {
 		
-		try {
-			Thread.sleep(2000);
-		}catch(InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(2000);
+//		}catch(InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		
-		x = x + 10;
-		setLocation(x,y);
-		setIcon(playerR);
+		right = true;
+		new Thread(()-> {
+			while(right) {
+				x = x + 10;
+				setLocation(x,y);
+				setIcon(playerR);
+				try {
+					//0.01초
+					Thread.sleep(10);
+				}catch(InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 
 	@Override

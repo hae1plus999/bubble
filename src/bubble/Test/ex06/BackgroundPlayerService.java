@@ -24,7 +24,16 @@ public class BackgroundPlayerService implements Runnable{
 
 	@Override
 	public void run() {
-		//색상확인
-		Color color = new Color(image.getRGB(player.getX(), player.getY()));
+		while(true) {
+			//색상확인
+			Color leftColor = new Color(image.getRGB(player.getX() - 10, player.getY() + 25));
+			Color rightColor = new Color(image.getRGB(player.getX() + 50 + 15, player.getY() + 25));
+			
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
